@@ -24,11 +24,11 @@ dependencies {
 sourceSets.main.java.srcDirs 'src/main/gen'
 
 intellij {
-    version '2021.2'
+    version '2021.3'
     pluginName 'BitBake'
     patchPluginXml {
         sinceBuild '201.0'
-        untilBuild '212.*'
+        untilBuild '213.*'
     }
 }
 
