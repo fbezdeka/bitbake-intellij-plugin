@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.21'
-    id 'org.jetbrains.grammarkit' version '2021.1.3'
+    id 'org.jetbrains.intellij' version '1.5.3'
+    id 'org.jetbrains.grammarkit' version '2021.2.2'
 }
 
 group 'com.github.vitalibo'
@@ -24,31 +24,31 @@ dependencies {
 sourceSets.main.java.srcDirs 'src/main/gen'
 
 intellij {
-    version '2021.3'
-    pluginName 'BitBake'
+    version = '2022.1'
+    pluginName = 'BitBake'
     patchPluginXml {
-        sinceBuild '201.0'
-        untilBuild '213.*'
+        sinceBuild = '213.0'
+        untilBuild = '221.*'
     }
 }
 
 patchPluginXml {
-    changeNotes """
+    changeNotes = """
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
 }
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
-task generateBitBakeLexer(type: GenerateLexer) {
+task generateBitBakeLexer(type: GenerateLexerTask) {
     source = "src/main/java/com/github/vitalibo/intellij/bitbake/BitBake.flex"
     targetDir = 'src/main/gen/com/github/vitalibo/intellij/bitbake'
     targetClass = "BitBakeLexer"
     purgeOldFiles = true
 }
 
-task generateBitBakeParser(type: GenerateParser) {
+task generateBitBakeParser(type: GenerateParserTask) {
     source = "src/main/java/com/github/vitalibo/intellij/bitbake/BitBake.bnf"
     targetRoot = 'src/main/gen'
     pathToParser = '/com/github/vitalibo/intellij/bitbake/parser/BitBakeParser.java'
