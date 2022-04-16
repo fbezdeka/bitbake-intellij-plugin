@@ -32,6 +32,12 @@ public class BitBakeAppendFileType extends LanguageFileType {
         return "bbappend";
     }
 
+    @NotNull
+    @Override
+    public String getDisplayName() {
+        return "BitBake Append";
+    }
+
     @Nullable
     @Override
     public Icon getIcon() {

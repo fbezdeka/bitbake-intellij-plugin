@@ -32,6 +32,12 @@ public class BitBakeRecipeFileType extends LanguageFileType {
         return "bb";
     }
 
+    @NotNull
+    @Override
+    public String getDisplayName() {
+        return "BitBake recipe file";
+    }
+
     @Nullable
     @Override
     public Icon getIcon() {
