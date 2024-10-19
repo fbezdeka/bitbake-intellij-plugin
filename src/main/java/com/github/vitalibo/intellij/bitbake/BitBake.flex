@@ -49,7 +49,7 @@ VALUE = (("'" {VALUE_CHARACTER}* "'") | (\" {VALUE_CHARACTER}* \"))
 
 <YYINITIAL> ^((python|fakeroot)\s*)*({FN_TOKEN})?\s*\(\s*\){WS}*\{$  { yypushback(yylength()); yybegin(FUNCTION_NAME); }
 <YYINITIAL> ^(def\s+)([0-9A-Za-z_-]+)(\s*\(.*\)\s*):\s*  { yypushback(yylength()); yybegin(PY_FUNCTION_NAME); }
-<YYINITIAL> ^({KEY_CHARACTER}+ "[" .* "]" ) { yypushback(yylength()); yybegin(LINE_WITH_FLAG); }
+<YYINITIAL> ^({KEY_CHARACTER}+ {OVERRIDE}* "[" .* "]" ) { yypushback(yylength()); yybegin(LINE_WITH_FLAG); }
 
 <FUNCTION_NAME> {
   "python" { return BitBakeTypes.PYTHON; }
@@ -100,6 +100,7 @@ VALUE = (("'" {VALUE_CHARACTER}* "'") | (\" {VALUE_CHARACTER}* \"))
 
 <LINE_WITH_FLAG> {
   {KEY_CHARACTER}+ { return BitBakeTypes.KEY; }
+  {OVERRIDE} { return BitBakeTypes.OVERRIDE; }
   {WHITE_SPACE}+ { return TokenType.BAD_CHARACTER; }
   \[ { yybegin(FLAG); return BitBakeTypes.ALB; }
 }
