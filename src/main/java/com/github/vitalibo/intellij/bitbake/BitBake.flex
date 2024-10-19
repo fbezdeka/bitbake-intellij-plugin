@@ -94,7 +94,7 @@ VALUE = (("'" {VALUE_CHARACTER}* "'") | (\" {VALUE_CHARACTER}* \"))
 
 <EXPORT_FUNC_STATEMENT> {
   [\w\.\-\+\{\}\$]+ { return BitBakeTypes.BB_FUNCTION_NAME; }
-  {CRLF}+ { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+  {CRLF}+ { yybegin(YYINITIAL); return BitBakeTypes.CRLF; }
   {WS}+ { return TokenType.WHITE_SPACE; }
 }
 
@@ -113,8 +113,8 @@ VALUE = (("'" {VALUE_CHARACTER}* "'") | (\" {VALUE_CHARACTER}* \"))
   "after" { return BitBakeTypes.AFTER; }
   "before" { return BitBakeTypes.BEFORE; }
   {KEY_CHARACTER}+ { return BitBakeTypes.BB_FUNCTION_NAME; }
-  {WS}+ {return TokenType.WHITE_SPACE; }
-  {CRLF}+ { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+  {WS}+ { return TokenType.WHITE_SPACE; }
+  {CRLF}+ { yybegin(YYINITIAL); return BitBakeTypes.CRLF; }
 }
 
 <YYINITIAL> ^{COMMENT} { return BitBakeTypes.COMMENT; }
